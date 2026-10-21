@@ -1,0 +1,12 @@
+// markdownlint rules for the files written for this repository (the globs are in
+// .markdownlint-cli2.jsonc). The defaults stand except where the house style differs.
+{
+  "default": true,
+  // Prose is not wrapped to a fixed width, and index tables hold long cells.
+  "MD013": false,
+  // A heading or a bold lead-in may be followed directly by its list.
+  "MD022": false,
+  "MD032": false,
+  // Delimiter rows are written compactly (|---|).
+  "MD060": false
+}

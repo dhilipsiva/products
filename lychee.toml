@@ -1,0 +1,10 @@
+# lychee settings for CI (.github/workflows/ci.yml), which names the files to check: the ones
+# written for this repository. The AI-generated reports are frozen records whose citations will
+# rot, and the templates' relative links point into the repository a template is copied to, so
+# neither is checked.
+include_fragments = "anchor-only"
+max_retries = 3
+retry_wait_time = 5
+timeout = 30
+# A rate limit is not a broken link.
+accept = ["200..=299", "429"]

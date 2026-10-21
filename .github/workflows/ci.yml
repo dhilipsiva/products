@@ -1,0 +1,72 @@
+# CI for the decision record: markdownlint and a link check (lychee) over the files written for
+# this repository, so the record cannot rot silently. The weekly run catches links that die
+# between pushes. The AI-generated reports are kept verbatim and are checked by neither (see
+# .markdownlint-cli2.jsonc and lychee.toml). Every action is pinned to a full commit SHA with its
+# release tag (CONVENTIONS.md, "Action pinning").
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Lint the Markdown
+        uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24.2.0
+        with:
+          # The file list is in .markdownlint-cli2.jsonc, and it is added to this input; naming one
+          # of its files here only replaces the action's default (every top-level .md).
+          globs: README.md
+
+  links:
+    name: Links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check the links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: >-
+            --config lychee.toml --no-progress
+            README.md DECISIONS.md CONVENTIONS.md docs/links.md
+            'docs/ideas/*.md' 'docs/ideas/*/README.md'
+
+  workflows:
+    name: Workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install actionlint 1.7.12
+        run: |
+          cd "$RUNNER_TEMP"
+          curl --silent --show-error --location --fail --output actionlint.tar.gz \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  actionlint.tar.gz" | sha256sum --check
+          tar --extract --gzip --file actionlint.tar.gz actionlint
+      - name: Check the workflows
+        run: '"$RUNNER_TEMP/actionlint" -color'

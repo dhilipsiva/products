@@ -1,0 +1,14 @@
+// The files markdownlint checks (CI and `markdownlint-cli2` with no arguments): the ones written
+// for this repository. The AI-generated reports in docs/ and docs/ideas/ are kept verbatim and are
+// not reformatted, so they are not linted. The rules are in .markdownlint.jsonc.
+{
+  "globs": [
+    "README.md",
+    "DECISIONS.md",
+    "CONVENTIONS.md",
+    "docs/links.md",
+    "docs/ideas/*.md",
+    "docs/ideas/*/README.md",
+    "templates/*.md"
+  ]
+}

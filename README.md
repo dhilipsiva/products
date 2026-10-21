@@ -24,6 +24,16 @@ Also here:
 - [docs/ideas/](docs/ideas/README.md): idea notes for the repositories the portfolio archives or revives.
 - [docs/original/](docs/original/): the PDF and docx the two converted reports came from.
 
+## Checks
+
+CI runs markdownlint and a link check over the files written for this repository; the AI-generated reports are
+kept verbatim and are not checked. To run both locally:
+
+```bash
+npx markdownlint-cli2   # the files and rules are in .markdownlint-cli2.jsonc and .markdownlint.jsonc
+lychee --config lychee.toml README.md DECISIONS.md CONVENTIONS.md docs/links.md 'docs/ideas/*.md' 'docs/ideas/*/README.md'
+```
+
 ## Licence
 
 The research reports were generated with AI assistants (ChatGPT Deep Research, Gemini and Claude) and quote third
@@ -35,6 +45,9 @@ parties, whose text keeps its own terms. Everything else is licensed under eithe
 > Written on 2025-04-19; the "More Products" list at its top was added on 2025-06-16. The text addresses the
 > owner ("your MVP", "in my view") and reads as an AI assistant's answer; which assistant wrote it is not
 > recorded. ADR-0001 cites it as "the April 2025 comparison in README.md".
+
+<!-- The comparison below is kept verbatim, so it is not linted. -->
+<!-- markdownlint-disable -->
 
 ### More Products
 

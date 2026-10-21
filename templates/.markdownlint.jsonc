@@ -1,0 +1,5 @@
+// The templates mark what to fill in with <placeholders>, which markdownlint reads as inline HTML.
+{
+  "extends": "../.markdownlint.jsonc",
+  "MD033": false
+}
