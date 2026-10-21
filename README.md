@@ -3,6 +3,8 @@
 > AI assistants (ChatGPT Deep Research, Gemini and Claude) and quote third parties, whose text keeps its own terms. Everything
 > else is licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE) at your option.
 > The analysis below is the owner's first-person note of April 2025 (updated in June 2025).
+>
+> Idea notes for the repositories the portfolio archives or revives are indexed in [docs/ideas/](docs/ideas/README.md).
 
 # More Products
 

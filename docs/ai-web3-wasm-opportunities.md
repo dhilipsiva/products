@@ -1,8 +1,8 @@
 # Opportunities at the Intersection of AI/ML, Web3, WebAssembly, and Rust
 
 > Converted from [the original docx](original/ai-web3-wasm-opportunities.docx) with pandoc 3.7 on 2026-10-21.
-> Its metadata names no author or tool (created 2025-07-24, application "Microsoft Word 12.0.0"), so its
-> assistant is not recorded; it is one of the AI-generated reports in this repository.
+> A ChatGPT Deep Research report, per the docx's metadata (`docProps/custom.xml` names the generator; created
+> 2025-07-24).
 
 Working at the confluence of **AI/ML**, **Web3 (blockchain/decentralization)**, **WebAssembly (Wasm)**, and **Rust** opens up a range of exciting possibilities. Below, we address three aspects of this intersection: **(1)** profitable business ideas, **(2)** successful open-source project directions, and **(3)** high-paying remote job opportunities. Each section includes concrete examples and references to current projects demonstrating these opportunities.
 
