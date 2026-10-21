@@ -1,12 +1,42 @@
-> **About this repository.** This is the portfolio's decision record: [DECISIONS.md](DECISIONS.md),
-> [CONVENTIONS.md](CONVENTIONS.md) and the shared `templates/`. The research reports in it were generated with
-> AI assistants (ChatGPT Deep Research, Gemini and Claude) and quote third parties, whose text keeps its own terms. Everything
-> else is licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE) at your option.
-> The analysis below is the owner's first-person note of April 2025 (updated in June 2025).
->
-> Idea notes for the repositories the portfolio archives or revives are indexed in [docs/ideas/](docs/ideas/README.md).
+# products
 
-# More Products
+The decision record for the repositories under github.com/dhilipsiva: [DECISIONS.md](DECISIONS.md) (ADR-0001, the
+product thesis, and the owner's dated rulings), [CONVENTIONS.md](CONVENTIONS.md) and the shared
+[`templates/`](templates/). This README indexes the research those decisions were made from.
+
+## Research index
+
+The status column follows [ADR-0001](DECISIONS.md#adr-0001-product-thesis). The market, pricing and revenue
+figures in these documents are LLM-synthesised and unverified.
+
+| Document | Source assistant | Date | Question asked | Key recommendation | Status (ADR-0001) |
+|---|---|---|---|---|---|
+| [The April 2025 comparison](#the-april-2025-comparison) (below) | An AI assistant; which one is not recorded | 2025-04-19; list added 2025-06-16 | Which of eight SME software categories should a solo Rust developer build first? | A CRM MVP first, a help desk second | **Pursued:** thesis A, CRM via sme-suite (D6). The other seven categories are rejected. |
+| [A Strategic Roadmap for Building a Profitable Open-Source Business in Rust](docs/rust-oss-business-roadmap.md) | Gemini Deep Research | 2025-06-16 (its citations) | Which open-source Rust B2B product reaches about 1 crore INR a year by 2027, solo, at 30-40 hours a week with no marketing budget? | DevOps and infrastructure tooling, starting with Turbo-Runner (a CI runner); calls CRM "heavily saturated" | **Rejected:** Turbo-Runner and the data-engineering products. **Parked:** Gatekeeper, as an [idea note](docs/ideas/api-gateway/README.md). Thesis B is pursued through api-client instead (D11). |
+| [High-Leverage Open Source Product Ideas (Rust-Based)](docs/high-leverage-oss-product-ideas.md) ([PDF](docs/original/high-leverage-oss-product-ideas.pdf)) | ChatGPT Deep Research, per the PDF's metadata | June 2025 (committed 2025-06-16) | Which open-source Rust tools could replace expensive SaaS for SMEs and enterprises? | Team chat, unified observability, a knowledge base, an ATS and a project tracker, combined into a dev-collaboration suite | **Rejected:** crowded categories with no code in the portfolio. |
+| [Profitable Rust B2B Product Opportunities for 2027](docs/rust-b2b-opportunities-2027.md) | Claude, a compass research export (by its original file name) | June 2025 (committed 2025-06-16) | Which Rust B2B products will be profitable by 2027, and on what open-core path? | Real-time data processing or CI/CD tooling first, monitoring second | **Rejected:** no code exists for either, and no capacity. Its MRR milestones are recorded in ADR-0001. |
+| [The Convergence Economy: AI, Web3, Wasm and Rust](docs/convergence-economy-ai-web3-wasm-rust.md) | Gemini Deep Research | 2025-07-24 (its citations) | What ventures, open-source projects and careers sit at the intersection of AI, Web3, Wasm and Rust? | Three ventures (a DeAI PaaS, a Wasm-native serverless AI-inference cloud, on-chain AI attribution) and three open-source projects (a LangChain for DeAI agents, a WASI-AI toolkit, Notary) | **Pursued in part:** the WASI-AI toolkit idea, through wasi-warden (thesis C, D7 and D8). **Rejected:** the Web3 ventures and projects, and the inference cloud as a cloud. **Out of scope:** Part V, the job market and careers. |
+| [Opportunities at the Intersection of AI/ML, Web3, WebAssembly, and Rust](docs/ai-web3-wasm-opportunities.md) ([docx](docs/original/ai-web3-wasm-opportunities.docx)) | ChatGPT Deep Research, per the docx's metadata | 2025-07-24 | What profitable businesses and open-source directions exist at that intersection, and how does one find a remote job in it? | Five businesses (a Wasm cloud/edge platform, AI model serving, decentralized AI services, confidential computing on Enarx, multi-chain developer tools) and four open-source directions | **Pursued in part:** AI model serving, through wasi-warden's routing to existing servers. **Rejected:** the other four businesses. **Out of scope:** section 3, finding a remote job. |
+
+Also here:
+
+- [docs/links.md](docs/links.md): the projects worth knowing, why each matters, and which repository adopted it.
+- [docs/ideas/](docs/ideas/README.md): idea notes for the repositories the portfolio archives or revives.
+- [docs/original/](docs/original/): the PDF and docx the two converted reports came from.
+
+## Licence
+
+The research reports were generated with AI assistants (ChatGPT Deep Research, Gemini and Claude) and quote third
+parties, whose text keeps its own terms. Everything else is licensed under either of [MIT](LICENSE-MIT) or
+[Apache-2.0](LICENSE-APACHE) at your option.
+
+## The April 2025 comparison
+
+> Written on 2025-04-19; the "More Products" list at its top was added on 2025-06-16. The text addresses the
+> owner ("your MVP", "in my view") and reads as an AI assistant's answer; which assistant wrote it is not
+> recorded. ADR-0001 cites it as "the April 2025 comparison in README.md".
+
+### More Products
 
 1. Team Chat
 2. https://github.com/makeplane/plane (Project Management)
@@ -19,128 +49,128 @@ Below is a short analysis of each broad product category—where it might fit, w
 
 ---
 
-## 1. **CRM (Customer Relationship Management)**
+#### 1. **CRM (Customer Relationship Management)**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **Widespread Need**: Nearly every SME and startup needs a basic CRM to track leads, customers, deals, and tasks.  
 - **Core of the Business**: A CRM often becomes the central hub for customer data, enabling integrations with email, marketing automation, invoicing, and more.  
 - **Open-Source Gap**: There are open-source CRMs (e.g., SuiteCRM, Odoo’s CRM), but many are older tech stacks, slower, or not as cloud-friendly. A modern Rust-based CRM could stand out in performance and efficiency.
 
-### Potential Challenges
+##### Potential Challenges
 - **Crowded Market**: Tons of competition—both proprietary (HubSpot, Pipedrive, Salesforce) and open-source.  
 - **Feature Expectations**: Users often want robust reporting, pipeline views, automation rules, integrations—this can expand your MVP scope if you’re not careful.
 
-### Overall
+##### Overall
 A well-scoped, modern open-source CRM built in Rust has a **good shot** at attracting attention if it’s truly simpler, faster, and more cost-effective than the competition.
 
 ---
 
-## 2. **ERP (Enterprise Resource Planning)**
+#### 2. **ERP (Enterprise Resource Planning)**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **Large Market**: ERP covers accounting, inventory, HR, operations—critical for growing SMEs.  
 - **Painful Proprietary Licenses**: Commercial ERP solutions can be very expensive (SAP, Oracle). SMEs often look for cheaper or open-source alternatives.
 
-### Potential Challenges
+##### Potential Challenges
 - **Complexity**: A “true” ERP is notoriously complex (modules for inventory, manufacturing, supply chain, finance, etc.). It’s large in scope, and building a minimal ERP that still delivers real value is tricky.  
 - **Longer Sales Cycle**: SMEs are slower to replace core systems like ERP; many steps involved in the buying or migration process.
 
-### Overall
+##### Overall
 Great for a long-term vision, but risky as a **first** MVP due to complexity and slower adoption cycles.
 
 ---
 
-## 3. **Help Desk / Support Desk (e.g., Zendesk, Freshdesk)**
+#### 3. **Help Desk / Support Desk (e.g., Zendesk, Freshdesk)**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **High Demand**: Almost every company with external customers needs some form of ticketing or help desk.  
 - **Potential for Differentiation**: A lean, fast, open-source help desk that’s easy to self-host or use in the cloud is appealing, especially if it undercuts the costs of Zendesk/Freshdesk.
 
-### Potential Challenges
+##### Potential Challenges
 - **Multi-Channel Complexity**: Users expect email integration, chat widgets, knowledge base, social media channels. Even a minimal help desk can get complicated quickly.  
 - **Strong Existing Open-Source Players**: Projects like Zammad, Chatwoot, or UVdesk already exist. You’d need a clear differentiator (e.g., Rust-based performance, easy scalability, tight CRM integration).
 
-### Overall
+##### Overall
 Could be a **strong** MVP if you focus on a lightweight but modern approach. However, plan carefully for the feature complexity (integrations, ticket workflows, multi-channel support).
 
 ---
 
-## 4. **Email Marketing, Campaign Management, Analytics**
+#### 4. **Email Marketing, Campaign Management, Analytics**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **SME Staple**: Email remains a top marketing channel. Many businesses are unhappy with rising costs on Mailchimp, HubSpot, etc.  
 - **Open-Source Opportunity**: Fewer polished open-source email marketing platforms (Mautic is one, but it’s in PHP). A Rust-based, high-throughput solution might be very attractive to marketers who want speed and cost-efficiency.
 
-### Potential Challenges
+##### Potential Challenges
 - **Deliverability & Infrastructure**: Effective email marketing depends heavily on IP reputation, spam compliance, bounce handling, etc. This goes beyond coding the software.  
 - **Feature Expectations**: Drip campaigns, segmentation, analytics, contact lists, and complex automation can balloon your scope.
 
-### Overall
+##### Overall
 If you can handle deliverability and keep feature scope small at first (broadcast campaigns + basic analytics), it could be a **relatively straightforward** product to build and monetize.
 
 ---
 
-## 5. **Project Management / Bug Tracking (Atlassian-like)**
+#### 5. **Project Management / Bug Tracking (Atlassian-like)**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **Developer & Team Focus**: Tools like Jira, Trello, and GitLab have a large user base. Teams often want simpler or cheaper solutions.  
 - **Rust Developer Community**: You might tap into fellow Rust developers who want an open-source PM tool built with a modern stack.
 
-### Potential Challenges
+##### Potential Challenges
 - **Strong Incumbents**: Jira, GitLab, Trello, and a range of open-source PM tools exist.  
 - **Extensibility Expectations**: Many teams want advanced workflows, integrations with CI/CD, code hosting, etc. This can grow complex quickly.
 
-### Overall
+##### Overall
 It can work if you **nail a specific niche** (e.g., hyper-fast and minimal for small dev teams), but it’s quite a crowded space.
 
 ---
 
-## 6. **HR / Applicant Tracking** 
+#### 6. **HR / Applicant Tracking** 
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **Continual Hiring Needs**: Many SMEs constantly recruit. An easy ATS that’s open-source could be appealing.  
 - **Less Crowded**: Fewer well-known open-source ATS solutions than, say, CRM or help desk tools.
 
-### Potential Challenges
+##### Potential Challenges
 - **Irregular Purchase Priority**: Many SMEs consider an ATS nice to have, but not essential or urgent like sales CRM or support desks.  
 - **Smaller Market Segment**: HR tech is big overall, but specifically among **very small** businesses, adoption can be slower.
 
-### Overall
+##### Overall
 Viable, but might not be the fastest path to broad adoption (or large ARR) compared to CRM or help desk.
 
 ---
 
-## 7. **Git Hosting / DevOps Tools (Atlassian, GitLab-alternatives)**
+#### 7. **Git Hosting / DevOps Tools (Atlassian, GitLab-alternatives)**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **Appeal to Developers**: A Rust-based Git hosting platform might attract fans from the Rust and open-source dev community.  
 - **Potential Performance Edge**: Git operations can be resource-intensive in large repos. A Rust solution could be faster.
 
-### Potential Challenges
+##### Potential Challenges
 - **High Complexity**: Git hosting, CI/CD runners, code review, project management, etc., is huge scope if you want to compete meaningfully with GitLab or GitHub.  
 - **Smaller Immediate SME Market**: Non-tech SMEs usually won’t pay for Git hosting. The big customers here are dev shops, which have plenty of established options already.
 
-### Overall
+##### Overall
 Interesting from a tech perspective, but not the best if you’re aiming for broad SME adoption in a short timeframe.
 
 ---
 
-## 8. **APM (Application Performance Monitoring), Observability Tools**
+#### 8. **APM (Application Performance Monitoring), Observability Tools**
 
-### Why It Could Succeed
+##### Why It Could Succeed
 - **High Willingness to Pay**: Developers & companies pay for performance monitoring (DataDog, New Relic).  
 - **Rust Strength**: Rust can handle high throughput of metrics/log data efficiently, potentially cheaper than big incumbents.
 
-### Potential Challenges
+##### Potential Challenges
 - **Niche Market Among SMEs**: Many small businesses don’t run large-scale tech; they might be content with simpler or cheaper solutions like basic server logs, low-tier Sentry, etc.  
 - **Strong Competition**: DataDog, New Relic, Grafana Cloud—big players with deep pockets.
 
-### Overall
+##### Overall
 Strong potential for a developer-focused startup, but it’s less of an **SME** staple unless you specifically target software companies or mid-sized tech-driven SMEs.
 
 ---
 
-## **Which Has the Highest Chance of Success?**
+#### **Which Has the Highest Chance of Success?**
 
 Given all the above, **your best bet for an initial product MVP (especially if you want to hit revenue quickly) is a modern, open-source CRM**. Here’s why:
 
@@ -149,12 +179,12 @@ Given all the above, **your best bet for an initial product MVP (especially if y
 3. **Easier Upsell**: Once a customer’s data is in your CRM, it’s simpler to sell them an additional help desk module, email marketing module, or advanced analytics. The CRM is a “gateway” product for an integrated suite.  
 4. **Reasonable MVP Scope**: A minimal CRM with contact management, deal pipelines, tasks, and basic reporting is a well-bounded feature set. You can ship an MVP relatively quickly compared to, say, a full ERP.
 
-### If You’re Not Drawn to CRM…
+##### If You’re Not Drawn to CRM…
 A close **second** would be a **Help Desk / Support Desk**. It’s also widely needed, and a performance-optimized open-source alternative to Zendesk or Freshdesk could gain traction. However, you’ll have to handle email parsing, chat integrations, etc., which can be a bit heavier to implement at MVP stage.
 
 ---
 
-## **Recommended Next Steps**
+#### **Recommended Next Steps**
 
 1. **Start with a Simplified CRM**  
    - Core features: contact management, pipeline, tasks/activities, basic reporting, user roles.  
