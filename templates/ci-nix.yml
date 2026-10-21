@@ -1,0 +1,75 @@
+# ci.yml template for a flake repository (CONVENTIONS.md, "Templates"). Cut from nibli's workflow:
+# CI runs the same gate a developer runs locally, `nix develop --command just ci`, so the two can
+# never drift. Copy to .github/workflows/ci.yml; the flake's dev shell must provide `just` and the
+# toolchain (templates/flake.nix), and the Justfile's `ci` recipe runs fmt, lint, test and deny
+# (templates/Justfile). Split long gates into parallel jobs (one recipe each) so every job stays
+# well inside its timeout. Every action is pinned to a full commit SHA with its release tag
+# (CONVENTIONS.md, "Action pinning").
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  # release.yml calls this workflow as its gate, so the release gate is the CI gate by construction.
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: just ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+      - name: Cache the Nix store
+        uses: DeterminateSystems/magic-nix-cache-action@84c0677f58dcedf3b91f8223ce36a9ea5b3c84b7 # v15
+      - name: Run the local gate
+        run: nix develop --extra-experimental-features 'nix-command flakes' --command just ci
+
+  flake:
+    name: nix flake check
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+      - name: Cache the Nix store
+        uses: DeterminateSystems/magic-nix-cache-action@84c0677f58dcedf3b91f8223ce36a9ea5b3c84b7 # v15
+      - name: Check the flake
+        run: nix flake check --extra-experimental-features 'nix-command flakes'
+
+  workflows:
+    name: Workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install actionlint 1.7.12
+        run: |
+          cd "$RUNNER_TEMP"
+          curl --silent --show-error --location --fail --output actionlint.tar.gz \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  actionlint.tar.gz" | sha256sum --check
+          tar --extract --gzip --file actionlint.tar.gz actionlint
+      - name: Check the workflows
+        run: '"$RUNNER_TEMP/actionlint" -color'
