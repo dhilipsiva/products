@@ -165,7 +165,7 @@ Ruled in D3 (2026-10-21):
 - Every Rust repository commits a `deny.toml` copied from [templates/deny.toml](templates/deny.toml) and runs `cargo deny check advisories bans licenses sources` in CI.
 - Advisories deny by default. An open RUSTSEC id may be ignored only with a comment naming the work item that closes it and an expiry no later than 90 days after the commit. An ignore without both is a CI failure in review.
 - The deny job may start non-blocking while ignores exist. It becomes blocking when the ignore list is empty, and it never goes back.
-- Licences are allow-listed (MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, Unicode, Zlib, MPL-2.0, CC0-1.0; CC-BY-4.0 only where prose is vendored). Sources are crates.io plus explicitly allowed git URLs.
+- Licences are allow-listed (MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, Unicode, Zlib, MPL-2.0, CC0-1.0, BSL-1.0; CC-BY-4.0 only where prose is vendored). Sources are crates.io plus explicitly allowed git URLs.
 - JavaScript repositories run `npm audit --audit-level=high` in CI instead.
 
 ## Action pinning

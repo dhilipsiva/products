@@ -43,6 +43,8 @@ allow = [
     "MPL-2.0",
     # A public-domain dedication (tiny-keccak and others).
     "CC0-1.0",
+    # The Boost licence (xxhash-rust and others).
+    "BSL-1.0",
 ]
 confidence-threshold = 0.8
 # The allow list is shared by every repository, so entries a given repository never uses are normal.
