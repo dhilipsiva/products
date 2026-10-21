@@ -1,0 +1,39 @@
+# Justfile skeleton (CONVENTIONS.md, "Templates"), cut from nibli's recipes. `just ci` is the one
+# local gate (C4): the same recipe CI runs through `nix develop --command just ci` (ci-nix.yml).
+# Add recipes as the repository needs them; keep `ci` the full gate and keep it fast.
+
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+export RUST_BACKTRACE := "1"
+
+# List the recipes.
+default:
+    @just --list
+
+# Type-check every crate and target.
+check:
+    cargo check --locked --workspace --all-targets
+
+# Run the tests.
+test:
+    cargo test --locked --workspace
+
+# Formatting and Clippy, with warnings as errors (C5).
+lint:
+    cargo fmt --all -- --check
+    cargo clippy --locked --workspace --all-targets -- -D warnings
+
+# Build the docs, with warnings as errors.
+doc:
+    RUSTDOCFLAGS="-D warnings" cargo doc --locked --workspace --no-deps
+
+# Advisories, bans, licences and sources against the committed deny.toml (C8).
+deny:
+    cargo deny check advisories bans licenses sources
+
+# The local gate: everything CI checks.
+ci: lint test doc deny
+
+# Package and verify-build every publishable crate without uploading (skips `publish = false`).
+release-dry-run:
+    cargo publish --locked --dry-run --workspace
