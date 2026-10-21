@@ -1,0 +1,40 @@
+# The `[workspace.package]` snippet (CONVENTIONS.md: "Licence policy", "Identity", "MSRV policy").
+# Paste into the root Cargo.toml and fill every FILL. Ship templates/LICENSE-MIT and
+# templates/LICENSE-APACHE at the repository root with the years filled in, and give every published
+# member crate the pair too (`ln -s ../LICENSE-MIT ../LICENSE-APACHE <crate>/`): cargo packages a
+# symlink's contents, and a crate tarball without the files does not carry the notice MIT requires.
+
+[workspace]
+members = ["FILL-crate"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+# The stable toolchain CI uses at the release tag; moved forward deliberately, with a CHANGELOG line.
+rust-version = "FILL, for example 1.99"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/dhilipsiva/FILL-repository"
+readme = "README.md"
+
+# Each member's Cargo.toml then inherits everything above and adds what is per-crate:
+#
+#   [package]
+#   name = "FILL-crate"           # verified free on crates.io before the first publish (Identity)
+#   description = "FILL: one sentence saying what the crate does"
+#   version.workspace = true
+#   edition.workspace = true
+#   rust-version.workspace = true
+#   license.workspace = true
+#   repository.workspace = true
+#   readme.workspace = true
+#   keywords = ["FILL"]          # at most five
+#   categories = ["FILL"]        # from https://crates.io/category_slugs
+#
+# A crate that is never published says so, so the release check and cargo-deny treat it as private:
+#
+#   publish = false
+#
+# A path dependency on another workspace crate carries a version too, or crates.io rejects it:
+#
+#   FILL-other = { path = "../FILL-other", version = "0.1.0" }

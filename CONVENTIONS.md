@@ -148,6 +148,7 @@ Requiring these on small repositories produces stale files, not quality:
 Ruled in D2 (2026-10-21):
 - Every repository is dual-licensed MIT OR Apache-2.0: two files, `LICENSE-MIT` and `LICENSE-APACHE`, copied from [templates/](templates/), plus the manifest field `license = "MIT OR Apache-2.0"` (in `package.json`: `"license": "MIT OR Apache-2.0"`). This repository's notes included.
 - One copyright line everywhere: `Copyright (c) <first year>-<current year> dhilipsiva`.
+- Every published crate's directory carries the pair as well (symlinks to the root files are fine; cargo packages their contents), so each crates.io tarball ships the licence text.
 - Exception: rights-nobody-has-to-earn keeps its layered licences (CC0 at the root, MIT + Apache-2.0 for code, CC-BY for text) under its own rulings.
 - Per-file SPDX headers are a rights-nobody-has-to-earn practice only.
 - Text quoted from third parties in the research reports keeps its own terms.
