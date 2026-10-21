@@ -38,6 +38,9 @@ To maximize stars and adoption, **make your project as accessible and useful as 
 
 ## 3. Finding a High-End Remote Job (From India)
 
+> **Out of scope for the decision record:** career and job-market material, kept for context only
+> (README index).
+
 There is **strong demand for developers** who are skilled in Rust, WebAssembly, and blockchain/AI. Many companies in these domains are fully remote and offer very competitive salaries, making it feasible to land a high-paying job from India. In fact, Rust developers in the Web3 space command some of the highest salaries in tech – the **average Rust developer salary in crypto is about \\150k/year, with top offers reaching \\250k–\\275k**[\[36\]](https://web3.career/web3-salaries/rust-developer#:~:text=The%20average%20yearly%20salary%20of,and%20a%20maximum%20of%20%24275k). Even mid-level Rust engineers (4-6 years experience) in blockchain average around \\160k (significantly above typical software roles). These figures reflect how sought-after this expertise is. Furthermore, Web3 companies often operate globally, so they are used to hiring remotely across time zones.
 
 **Who’s hiring?** Dozens of organizations at the AI/Web3/Wasm intersection are looking for talent. Some notable examples include:

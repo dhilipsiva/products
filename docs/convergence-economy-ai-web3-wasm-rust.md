@@ -224,6 +224,9 @@ The primary challenge for a developer working with the Convergence Stack is not 
 
 ## **Part V: The Talent Nexus \- Securing a High-Value Career**
 
+> **Out of scope for the decision record:** career and job-market material, kept for context only
+> (README index).
+
 The rapid emergence of the Convergence Stack has created a significant demand for highly skilled engineers who can operate at the intersection of these four domains. The job market is characterized by senior-level roles, competitive compensation, and a focus on deep technical expertise. For an ambitious technologist, this represents a prime opportunity to secure a high-impact, high-paying career. This section analyzes the current job market, defines the key roles to target, and provides a strategic roadmap for positioning oneself as a top-tier candidate.
 
 ### **Analysis of the Job Market**
