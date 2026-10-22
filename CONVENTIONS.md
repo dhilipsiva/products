@@ -202,7 +202,7 @@ Canonical copies live in [templates/](templates/). Copy them; don't re-derive th
 
 ## Toolchains: what `nix develop` supplies and what the workstation must
 
-What each repository needs beyond cargo/rustc. The table is the assessment's reading of 2026-10-20 and is **unverified until P0-INFRA-11** re-runs `nix develop -c <tool> --version` in each flake repository and dates the result here.
+What each repository needs beyond cargo/rustc. The six flake repositories listed under "Verified" were checked on 2026-10-22 by running each tool inside the repository's dev shell. Their rows below follow that check. The other rows are the assessment's reading of 2026-10-20.
 
 | Repository | Flake supplies | Workstation must supply |
 |---|---|---|
@@ -211,10 +211,10 @@ What each repository needs beyond cargo/rustc. The table is the assessment's rea
 | rights-nobody-has-to-earn | no root flake (`ui/shell.nix` only) | git-lfs, wasm32-unknown-unknown, wasm-bindgen-cli 0.2.128, uv |
 | botwork | no flake | rustup-style stable and nightly, musl and wasip2 targets, cargo-llvm-cov, cargo-mutants, cargo-fuzz, tree-sitter-cli, Node, Python, Playwright |
 | tree-sitter-nibli | no flake | tree-sitter CLI 0.25.x, cc, cmake, make, node, python |
-| uniblox | rust-bin stable with wasm32, wasm-bindgen-cli 0.2.121, coturn, redis-server | nothing |
+| uniblox | rust-bin stable with wasm32, wasm-bindgen-cli 0.2.129, binaryen, node, coturn, redis-server | nothing |
 | dex-parser-analyzer | wasm32-unknown-unknown, trunk, binaryen, wasm-pack | nothing (fuzzing gets its own dev shell) |
 | sme-suite | just, cargo-watch, sea-orm-cli | Docker for PostgreSQL 17 |
-| wasi-warden | rust-overlay 1.91.1 with wasip2 (EOL nixpkgs) | chromedriver, an OpenAI-compatible endpoint |
+| wasi-warden | rust-overlay 1.99.1 with wasip2, chromedriver (nixpkgs-unstable) | an OpenAI-compatible endpoint |
 | api-client | GUI runtime libraries (EOL nixpkgs) | a Wayland or X11 session |
 | api-gateway | a template Rust dev shell | nothing |
 | r3-engine | fenix, `-C target-cpu=znver5` | the wasm32 target |
@@ -222,3 +222,28 @@ What each repository needs beyond cargo/rustc. The table is the assessment's rea
 | wasmai | no flake | wasm32-wasip1, WasmEdge with the WASI-NN plugin |
 | EduStages | no flake | node and npm |
 | crm, products, diskev, webrtc-rust-native-gui, rustymail | no flake | system cargo (rustymail's current lockfile also needs OpenSSL headers; products' conversions need pandoc and pdftotext) |
+
+Verified 2026-10-22. Each check ran `nix develop --no-write-lock-file -c <tool> --version` at the commit named, in a clean worktree.
+
+- nibli (`3516ca7`):
+  - Flake supplies: just 1.46.0, cargo-component 0.21.1, and rustc 1.94.0 with the wasm32-wasip2, wasm32-wasip1 and wasm32-unknown-unknown standard libraries.
+  - Machine must supply: nothing.
+- uniblox (`687a867`):
+  - Flake supplies: cargo 1.99.1, wasm-bindgen 0.2.129, wasm-opt 132, node 22.23.3, coturn 4.17.2 (`turnserver`) and redis-server 8.10.2.
+  - Machine must supply: nothing.
+- dex-parser-analyzer (`8fbca94`):
+  - Flake supplies: trunk 0.21.14 and wasm-opt 132.
+  - Machine must supply: nothing.
+- sme-suite (`b2b1832`):
+  - Flake supplies: just 1.43.0 and sea-orm-cli 1.1.17.
+  - Machine must supply: Docker for PostgreSQL 17 (not re-checked).
+- wasi-warden (`88ae1c2`):
+  - Flake supplies: rustc 1.99.1 with the wasm32-wasip2 standard library, and chromedriver 155.0.8059.84.
+  - Machine must supply: an OpenAI-compatible endpoint.
+- r3-engine (`c29b9a0`):
+  - Flake supplies: rustc 1.93.0, with `RUSTFLAGS=-C target-cpu=znver5 -C target-feature=+avx512f,+avx512vpopcntdq`. rustc lists znver5 among its target CPUs.
+  - Machine must supply: the wasm32 target (not re-checked).
+- The workstation, outside any dev shell:
+  - It supplies only `just`, from the home profile.
+  - It has none of cargo-component, turnserver, redis-server, wasm-bindgen, trunk, wasm-opt or sea-orm-cli.
+  - Its rustc has no wasm32 standard library installed.
